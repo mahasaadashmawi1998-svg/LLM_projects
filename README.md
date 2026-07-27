@@ -5,9 +5,7 @@
 ### End-to-End AI Pipeline for Digital ASIC Verification
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![LLM](https://img.shields.io/badge/LLM-Mistral--7B-orange?style=for-the-badge)
-![LangChain](https://img.shields.io/badge/LangChain-Framework-blueviolet?style=for-the-badge)
 ![FAISS](https://img.shields.io/badge/Vector%20DB-FAISS-red?style=for-the-badge)
 ![SystemVerilog](https://img.shields.io/badge/SystemVerilog-IEEE%201800-yellow?style=for-the-badge)
 

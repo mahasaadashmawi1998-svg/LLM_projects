@@ -1,1 +1,199 @@
+# LLM_project
+# AI-Assisted RTL Verification Framework using LLMs
+
+## 1. Overview
+
+Traditional RTL verification requires engineers to manually understand specifications, analyze RTL, write assertions, develop testbenches, create coverage, and debug simulation failures.
+This project demonstrates how LLMs can automate many of these tasks by combining:
+
+- RTL Parsing
+- Retrieval-Augmented Generation (RAG)
+- SystemVerilog code generation
+- Simulation log analysis
+- AI-assisted debugging
+
+## 2. Features
+### 1. Chat with Verilog
+
+Ask natural language questions about Verilog RTL.
+
+Example:
+
+> How many inputs does this module have?
+
+> What does the reset signal do?
+
+---
+
+### 2. RTL Summarization
+
+Automatically generates documentation for RTL modules.
+
+Example output:
+
+- Module description
+- Inputs
+- Outputs
+- Registers
+- Functional behavior
+
+---
+
+### 3. RTL Parser
+
+Uses PyVerilog to extract RTL information into structured JSON.
+
+Example:
+
+```json
+{
+    "module": "counter",
+    "inputs": [
+        "clk",
+        "rst"
+    ],
+    "outputs": [
+        "count"
+    ],
+    "registers": [
+        "count"
+    ],
+    "always_blocks": 1
+}
+```
+
+---
+
+### 4. Retrieval-Augmented Generation (RAG)
+
+Stores verification knowledge inside a vector database.
+
+Knowledge sources include:
+
+- Design specification
+- RTL summary
+- Interface documentation
+
+The LLM retrieves only the relevant context before answering.
+
+---
+
+### 5. Assertion Generation
+
+Automatically generates SystemVerilog Assertions (SVA).
+
+Input:
+
+- RTL
+- Specification
+
+Output:
+
+```systemverilog
+assert property (...);
+```
+
+---
+
+### 6. Testbench Generation
+
+Automatically generates a SystemVerilog testbench skeleton.
+
+Includes:
+
+- DUT instantiation
+- Clock generation
+- Reset generation
+- Stimulus template
+
+---
+
+### 7. Functional Coverage Generation
+
+Automatically generates:
+
+- Covergroups
+- Coverpoints
+- Cross coverage
+
+based on the verification specification.
+
+---
+
+### 8. LLM Verification Debugger
+
+Analyzes
+
+- compile.log
+- simulation.log
+- coverage reports
+
+and explains:
+
+- compilation errors
+- simulation failures
+- assertion failures
+- possible RTL bugs
+- suggested fixes
+
+---
+
+
+## 3. Installation & Setup
+
+### a. Prerequisites
+
+Ensure you have the following installed:
+
+- Python 3.10+
+- Jupyter Notebook or Google Colab
+- Required Python libraries:
+  ```bash
+  pip install pandas langchain nltk torch
+  ```
+
+### b. Running in Jupyter Notebook
+
+1. Clone this repository or download the script.
+2. Open Jupyter Notebook and run `ecommerce_assistant.ipynb`.
+3. Load the product catalog by placing `product_catalog.json` in the same directory.
+4. Start chatting with the assistant!
+
+### c. Running in Google Colab
+
+1. Upload `product_catalog.json` to your Colab workspace.
+2. Run the following command to load the catalog:
+   ```python
+   from google.colab import files
+   uploaded = files.upload()
+   ```
+3. Execute all cells to start the chatbot.
+
+## 4. API Usage (LLM Integration)
+
+The assistant integrates LLM APIs for conversational AI. You can use:
+
+- **OpenAI GPT-4 API**
+- **Hugging Face Hub** (e.g., Microsoft Phi-2, Mistral-7B)
+
+## 5. Usage
+
+Once the setup is complete, interact with the chatbot by entering natural language queries. Example queries:
+
+- "Find me a laptop under \$1000 available for delivery tomorrow."
+- "What are the delivery charges for my location?"
+- "Add a red dress under \$50 to my cart and show me the estimated delivery time."
+- "Show me the latest smartphones with at least 16GB RAM."
+- "Remove the blue jeans from my cart and add a black hoodie instead."
+- "Track the order of ID ####"
+
+## 6. Acknowledgments
+
+Special thanks to the contributors and open-source community for their support in making this project possible.
+
+### Contributors:
+
+- **Israa Ahmed Abdulmohsen**
+- **Maha Ashmawy**
+- **Mahinaz Atfy**
 

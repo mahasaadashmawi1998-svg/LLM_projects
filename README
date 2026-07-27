@@ -1,9 +1,13 @@
-# LLM_project
 # AI-Assisted RTL Verification Framework using LLMs
 
-## 1. Overview
+An end-to-end AI-powered verification assistant for digital ASIC design. This project combines Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), RTL parsing, and verification automation to assist verification engineers throughout the RTL verification flow.
+
+---
+
+## Overview
 
 Traditional RTL verification requires engineers to manually understand specifications, analyze RTL, write assertions, develop testbenches, create coverage, and debug simulation failures.
+
 This project demonstrates how LLMs can automate many of these tasks by combining:
 
 - RTL Parsing
@@ -12,7 +16,10 @@ This project demonstrates how LLMs can automate many of these tasks by combining
 - Simulation log analysis
 - AI-assisted debugging
 
-## 2. Features
+---
+
+## Features
+
 ### 1. Chat with Verilog
 
 Ask natural language questions about Verilog RTL.
@@ -138,62 +145,191 @@ and explains:
 
 ---
 
+# Architecture
 
-## 3. Installation & Setup
+```
+                    User
+                      │
+                      ▼
+            Specification
+            Interface
+            RTL Design
+                      │
+                      ▼
+              RTL Parser
+                      │
+                      ▼
+               RTL Summary
+                      │
+                      ▼
+                  RAG Engine
+            (FAISS / ChromaDB)
+                      │
+                      ▼
+                     LLM
+      ┌───────────────┼────────────────┐
+      ▼               ▼                ▼
+ Assertions      Testbench        Coverage
+ Generator       Generator        Generator
+                      │
+                      ▼
+                HDL Simulator
+           (QuestaSim / ModelSim)
+                      │
+                      ▼
+          compile.log / simulation.log
+                      │
+                      ▼
+              LLM Verification
+                  Debugger
+                      │
+                      ▼
+            Verification Report
+```
 
-### a. Prerequisites
+---
 
-Ensure you have the following installed:
+# Technologies Used
 
-- Python 3.10+
-- Jupyter Notebook or Google Colab
-- Required Python libraries:
-  ```bash
-  pip install pandas langchain nltk torch
-  ```
+- Python
+- PyVerilog
+- LangChain
+- HuggingFace Transformers
+- Sentence Transformers
+- FAISS
+- ChromaDB
+- Mistral-7B-Instruct
+- SystemVerilog
+- QuestaSim / ModelSim
 
-### b. Running in Jupyter Notebook
+---
 
-1. Clone this repository or download the script.
-2. Open Jupyter Notebook and run `ecommerce_assistant.ipynb`.
-3. Load the product catalog by placing `product_catalog.json` in the same directory.
-4. Start chatting with the assistant!
+# Project Structure
 
-### c. Running in Google Colab
+```
+AI-Verification-Assistant/
 
-1. Upload `product_catalog.json` to your Colab workspace.
-2. Run the following command to load the catalog:
-   ```python
-   from google.colab import files
-   uploaded = files.upload()
-   ```
-3. Execute all cells to start the chatbot.
+│
+├── documents/
+│   ├── spec.txt
+│   ├── interface.txt
+│   └── rtl_summary.json
+│
+├── rtl/
+│   └── counter.v
+│
+├── parser/
+│   └── rtl_parser.py
+│
+├── rag/
+│   └── vector_database.py
+│
+├── generators/
+│   ├── assertion_generator.py
+│   ├── testbench_generator.py
+│   └── coverage_generator.py
+│
+├── debugger/
+│   └── log_debugger.py
+│
+├── outputs/
+│   ├── assertions.sv
+│   ├── counter_tb.sv
+│   ├── coverage.sv
+│   ├── compile.log
+│   ├── simulation.log
+│   └── report.md
+│
+└── README.md
+```
 
-## 4. API Usage (LLM Integration)
+---
 
-The assistant integrates LLM APIs for conversational AI. You can use:
+# Workflow
 
-- **OpenAI GPT-4 API**
-- **Hugging Face Hub** (e.g., Microsoft Phi-2, Mistral-7B)
+```
+RTL
+Specification
+Interface
+      │
+      ▼
+ RTL Parsing
+      │
+      ▼
+ RTL Summary
+      │
+      ▼
+ Store into RAG
+      │
+      ▼
+ Retrieve Context
+      │
+      ▼
+      LLM
+      │
+ ┌────┼─────┐
+ ▼    ▼     ▼
+SVA   TB  Coverage
+      │
+      ▼
+ Simulation
+      │
+      ▼
+ Debugger
+      │
+      ▼
+ Verification Report
+```
 
-## 5. Usage
+---
 
-Once the setup is complete, interact with the chatbot by entering natural language queries. Example queries:
+# Example Use Cases
 
-- "Find me a laptop under \$1000 available for delivery tomorrow."
-- "What are the delivery charges for my location?"
-- "Add a red dress under \$50 to my cart and show me the estimated delivery time."
-- "Show me the latest smartphones with at least 16GB RAM."
-- "Remove the blue jeans from my cart and add a black hoodie instead."
-- "Track the order of ID ####"
+- RTL documentation generation
+- Verification planning
+- Assertion generation
+- Testbench generation
+- Functional coverage generation
+- Simulation log analysis
+- AI-assisted RTL debugging
 
-## 6. Acknowledgments
+---
 
-Special thanks to the contributors and open-source community for their support in making this project possible.
+# Future Work
 
-### Contributors:
+- Multi-Agent Verification Framework
+- Automatic QuestaSim execution
+- UVM testbench generation
+- RISC-V Core verification assistant
+- Waveform analysis
+- Automatic assertion repair
+- Coverage closure recommendations
+- CI/CD integration for RTL verification
 
-- **Israa Ahmed Abdulmohsen**
-- **Maha Ashmawy**
-- **Mahinaz Atfy**
+---
 
+# Research Motivation
+
+The goal of this project is to investigate how Large Language Models can improve productivity in digital IC verification by automating repetitive verification tasks while assisting engineers with debugging and documentation.
+
+---
+
+# License
+
+MIT License
+
+---
+
+# Author
+
+**Maha Saad**
+
+Master's Student in Electronics Engineering
+
+Research Interests:
+
+- AI for ASIC Design
+- RTL Verification
+- Large Language Models
+- Retrieval-Augmented Generation
+- Digital IC Design

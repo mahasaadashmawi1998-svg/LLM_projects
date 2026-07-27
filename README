@@ -1,335 +1,70 @@
-# AI-Assisted RTL Verification Framework using LLMs
+# LLM_project
+# E-Commerce AI Assistant
 
-An end-to-end AI-powered verification assistant for digital ASIC design. This project combines Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), RTL parsing, and verification automation to assist verification engineers throughout the RTL verification flow.
+## 1. Overview
 
----
+This is an open-source e-commerce assistant built using Python, Jupyter Notebook/Google Colab, and LangChain. It enables natural language queries for product search, filtering, cart management, order placement, and tracking. The assistant integrates LLM APIs to handle conversational AI with multi-turn interactions.
 
-## Overview
+## 2. Features
 
-Traditional RTL verification requires engineers to manually understand specifications, analyze RTL, write assertions, develop testbenches, create coverage, and debug simulation failures.
+- **Conversational Search**: Users can search for products using natural language queries (e.g., "Find me a mobile phone under \$100").
+- **Product Filtering**: Filters products by category, subcategory, price, availability, and specifications.
+- **Cart & Order Management**: Handles adding/removing products from the cart and placing orders.
+- **Multi-Turn Conversations**: Uses LangChain memory for context retention.
+- **Supports API Integration**: Works with OpenAI GPT, Hugging Face models, and other LLMs.
+- **Scalable Product Catalog**: Handles catalogs with a large number of items.
 
-This project demonstrates how LLMs can automate many of these tasks by combining:
+## 3. Installation & Setup
 
-- RTL Parsing
-- Retrieval-Augmented Generation (RAG)
-- SystemVerilog code generation
-- Simulation log analysis
-- AI-assisted debugging
+### a. Prerequisites
 
----
+Ensure you have the following installed:
 
-## Features
+- Python 3.10+
+- Jupyter Notebook or Google Colab
+- Required Python libraries:
+  ```bash
+  pip install pandas langchain nltk torch
+  ```
 
-### 1. Chat with Verilog
+### b. Running in Jupyter Notebook
 
-Ask natural language questions about Verilog RTL.
+1. Clone this repository or download the script.
+2. Open Jupyter Notebook and run `ecommerce_assistant.ipynb`.
+3. Load the product catalog by placing `product_catalog.json` in the same directory.
+4. Start chatting with the assistant!
 
-Example:
+### c. Running in Google Colab
 
-> How many inputs does this module have?
+1. Upload `product_catalog.json` to your Colab workspace.
+2. Run the following command to load the catalog:
+   ```python
+   from google.colab import files
+   uploaded = files.upload()
+   ```
+3. Execute all cells to start the chatbot.
 
-> What does the reset signal do?
+## 4. API Usage (LLM Integration)
 
----
+The assistant integrates LLM APIs for conversational AI. You can use:
 
-### 2. RTL Summarization
+- **OpenAI GPT-4 API**
+- **Hugging Face Hub** (e.g., Microsoft Phi-2, Mistral-7B)
 
-Automatically generates documentation for RTL modules.
+## 5. Usage
 
-Example output:
+Once the setup is complete, interact with the chatbot by entering natural language queries. Example queries:
 
-- Module description
-- Inputs
-- Outputs
-- Registers
-- Functional behavior
+- "Find me a laptop under \$1000 available for delivery tomorrow."
+- "What are the delivery charges for my location?"
+- "Add a red dress under \$50 to my cart and show me the estimated delivery time."
+- "Show me the latest smartphones with at least 16GB RAM."
+- "Remove the blue jeans from my cart and add a black hoodie instead."
+- "Track the order of ID ####"
 
----
+## 6. Acknowledgments
 
-### 3. RTL Parser
+Special thanks to the contributors and open-source community for their support in making this project possible.
 
-Uses PyVerilog to extract RTL information into structured JSON.
+### Contributors:
 
-Example:
-
-```json
-{
-    "module": "counter",
-    "inputs": [
-        "clk",
-        "rst"
-    ],
-    "outputs": [
-        "count"
-    ],
-    "registers": [
-        "count"
-    ],
-    "always_blocks": 1
-}
-```
-
----
-
-### 4. Retrieval-Augmented Generation (RAG)
-
-Stores verification knowledge inside a vector database.
-
-Knowledge sources include:
-
-- Design specification
-- RTL summary
-- Interface documentation
-
-The LLM retrieves only the relevant context before answering.
-
----
-
-### 5. Assertion Generation
-
-Automatically generates SystemVerilog Assertions (SVA).
-
-Input:
-
-- RTL
-- Specification
-
-Output:
-
-```systemverilog
-assert property (...);
-```
-
----
-
-### 6. Testbench Generation
-
-Automatically generates a SystemVerilog testbench skeleton.
-
-Includes:
-
-- DUT instantiation
-- Clock generation
-- Reset generation
-- Stimulus template
-
----
-
-### 7. Functional Coverage Generation
-
-Automatically generates:
-
-- Covergroups
-- Coverpoints
-- Cross coverage
-
-based on the verification specification.
-
----
-
-### 8. LLM Verification Debugger
-
-Analyzes
-
-- compile.log
-- simulation.log
-- coverage reports
-
-and explains:
-
-- compilation errors
-- simulation failures
-- assertion failures
-- possible RTL bugs
-- suggested fixes
-
----
-
-# Architecture
-
-```
-                    User
-                      │
-                      ▼
-            Specification
-            Interface
-            RTL Design
-                      │
-                      ▼
-              RTL Parser
-                      │
-                      ▼
-               RTL Summary
-                      │
-                      ▼
-                  RAG Engine
-            (FAISS / ChromaDB)
-                      │
-                      ▼
-                     LLM
-      ┌───────────────┼────────────────┐
-      ▼               ▼                ▼
- Assertions      Testbench        Coverage
- Generator       Generator        Generator
-                      │
-                      ▼
-                HDL Simulator
-           (QuestaSim / ModelSim)
-                      │
-                      ▼
-          compile.log / simulation.log
-                      │
-                      ▼
-              LLM Verification
-                  Debugger
-                      │
-                      ▼
-            Verification Report
-```
-
----
-
-# Technologies Used
-
-- Python
-- PyVerilog
-- LangChain
-- HuggingFace Transformers
-- Sentence Transformers
-- FAISS
-- ChromaDB
-- Mistral-7B-Instruct
-- SystemVerilog
-- QuestaSim / ModelSim
-
----
-
-# Project Structure
-
-```
-AI-Verification-Assistant/
-
-│
-├── documents/
-│   ├── spec.txt
-│   ├── interface.txt
-│   └── rtl_summary.json
-│
-├── rtl/
-│   └── counter.v
-│
-├── parser/
-│   └── rtl_parser.py
-│
-├── rag/
-│   └── vector_database.py
-│
-├── generators/
-│   ├── assertion_generator.py
-│   ├── testbench_generator.py
-│   └── coverage_generator.py
-│
-├── debugger/
-│   └── log_debugger.py
-│
-├── outputs/
-│   ├── assertions.sv
-│   ├── counter_tb.sv
-│   ├── coverage.sv
-│   ├── compile.log
-│   ├── simulation.log
-│   └── report.md
-│
-└── README.md
-```
-
----
-
-# Workflow
-
-```
-RTL
-Specification
-Interface
-      │
-      ▼
- RTL Parsing
-      │
-      ▼
- RTL Summary
-      │
-      ▼
- Store into RAG
-      │
-      ▼
- Retrieve Context
-      │
-      ▼
-      LLM
-      │
- ┌────┼─────┐
- ▼    ▼     ▼
-SVA   TB  Coverage
-      │
-      ▼
- Simulation
-      │
-      ▼
- Debugger
-      │
-      ▼
- Verification Report
-```
-
----
-
-# Example Use Cases
-
-- RTL documentation generation
-- Verification planning
-- Assertion generation
-- Testbench generation
-- Functional coverage generation
-- Simulation log analysis
-- AI-assisted RTL debugging
-
----
-
-# Future Work
-
-- Multi-Agent Verification Framework
-- Automatic QuestaSim execution
-- UVM testbench generation
-- RISC-V Core verification assistant
-- Waveform analysis
-- Automatic assertion repair
-- Coverage closure recommendations
-- CI/CD integration for RTL verification
-
----
-
-# Research Motivation
-
-The goal of this project is to investigate how Large Language Models can improve productivity in digital IC verification by automating repetitive verification tasks while assisting engineers with debugging and documentation.
-
----
-
-# License
-
-MIT License
-
----
-
-# Author
-
-**Maha Saad**
-
-Master's Student in Electronics Engineering
-
-Research Interests:
-
-- AI for ASIC Design
-- RTL Verification
-- Large Language Models
-- Retrieval-Augmented Generation
-- Digital IC Design

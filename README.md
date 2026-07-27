@@ -481,9 +481,8 @@ This work serves as a foundation for future research on AI-assisted semiconducto
 
 # Author
 
-**Maha Saad**
+**Maha Saad elashmawi**
 
-Master's Student in Electronics Engineering
 
 Research Interests
 

@@ -1,0 +1,9 @@
+Counter Specification
+
+The counter increments on every rising edge of the clock.
+
+Maximum value = 15.
+
+After reaching 15, the counter wraps back to zero.
+
+Reset initializes the counter to zero.

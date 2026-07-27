@@ -1,0 +1,9 @@
+Inputs
+
+clk
+
+rst
+
+Outputs
+
+count[3:0]

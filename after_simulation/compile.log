@@ -1,0 +1,9 @@
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+Start time: 17:01:11 on Jul 20,2026
+vlog counter_asseration.sv coverage.sv Test_counter.sv 
+-- Compiling module counter_assertions
+** Error: (vlog-13069) counter_asseration.sv(11): near "property_counter": syntax error, unexpected IDENTIFIER, expecting "SystemVerilog keyword 'property'".
+** Error: counter_asseration.sv(16): (vlog-13205) Syntax error found in the scope following 'rst'. Is there a missing '::'?
+-- Compiling module counter_tb
+End time: 17:01:12 on Jul 20,2026, Elapsed time: 0:00:01
+Errors: 2, Warnings: 0
